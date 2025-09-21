@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN}
+      - ADMIN_GROUP_ID=${ADMIN_GROUP_ID}
+      - GROUP_LINK=${GROUP_LINK}
+    volumes:
+      - ./data:/var/www/html/data
+      - ./db:/var/www/html/db
