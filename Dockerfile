@@ -2,9 +2,10 @@ FROM php:8.2-apache
 
 # Install required extensions
 RUN apt-get update && apt-get install -y \
-    sqlite3 \
-    libsqlite3-dev \
-    && docker-php-ext-install sqlite3
+    sqlite3-dev \
+    && docker-php-ext-install sqlite3 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Enable Apache rewrite module
 RUN a2enmod rewrite
@@ -23,4 +24,5 @@ RUN mkdir -p /var/www/html/db && chmod 755 /var/www/html/db
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s \
+
   CMD curl -f http://localhost/ || exit 1
