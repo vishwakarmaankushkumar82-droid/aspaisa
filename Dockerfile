@@ -1,7 +1,8 @@
 FROM php:8.2-apache
 
 # Install required extensions
-RUN apt-get update && apt-get install -y sqlite3 \
+RUN apt-get update && apt-get install -y \
+    sqlite3 \
     libsqlite3-dev \
     && docker-php-ext-install sqlite3
 
@@ -24,6 +25,7 @@ RUN mkdir -p /var/www/html/db && chmod 755 /var/www/html/db
 HEALTHCHECK --interval=30s --timeout=3s \
 
   CMD curl -f http://localhost/ || exit 1
+
 
 
 
